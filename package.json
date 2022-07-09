@@ -1,10 +1,12 @@
 {
   "name": "code-blog",
   "version": "1.0.0",
-  "description": "A CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts. Built from scratch and deployed to Heroku. Following the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.",
+  "description": "A CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers posts. Built from scratch and deployed to Heroku. Following the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seeds/index.js"
   },
   "repository": {
     "type": "git",

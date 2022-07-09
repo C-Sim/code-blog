@@ -37,6 +37,6 @@ const options = {
   modelName: "blog",
 };
 
-Project.init(schema, options);
+Blog.init(schema, options);
 
 module.exports = Blog;
