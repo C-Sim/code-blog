@@ -2,10 +2,12 @@ const { User } = require("../../models");
 
 const login = async (req, res) => {
   try {
-    // get the user data from payload
     const { username, password } = req.body;
 
-    // get user by username
+    // if (!user || !password) {
+    //   renderError("signup-error", "Please complete all required fields.");
+    // }
+
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
@@ -36,10 +38,8 @@ const login = async (req, res) => {
 
 const signup = async (req, res) => {
   try {
-    // get the user data from payload
     const { username, password } = req.body;
 
-    // check if user exists
     const user = await User.findOne({ where: { username } });
 
     if (user) {
@@ -50,7 +50,6 @@ const signup = async (req, res) => {
       return res.status(500).json({ success: false });
     }
 
-    // create user
     const data = await User.create({
       username,
       password,

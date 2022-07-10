@@ -16,7 +16,8 @@ const blogData = [
   },
   {
     title: "I need somebody",
-    content: "Can anyone recommend a good mentor?",
+    content:
+      "This is more challenging than I expected. Can anyone recommend a good mentor?",
     userId: 2,
   },
   {

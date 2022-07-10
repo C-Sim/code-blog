@@ -9,6 +9,10 @@ const renderSignupPage = (req, res) => {
 const renderHomePage = (req, res) => {
   const { isLoggedIn } = req.session;
   return res.render("home", { currentPage: "home", isLoggedIn });
+
+  // Alt method - import path if needed
+  // const filePath = path.join(__dirname, "../../../public/publicHome.html");
+  // return res.sendFile(filePath);
 };
 
 module.exports = { renderLoginPage, renderSignupPage, renderHomePage };
