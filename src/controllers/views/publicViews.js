@@ -57,7 +57,7 @@ const renderBlogPage = async (req, res) => {
 
   const blog = blogFromDb.get({ plain: true });
 
-  return res.render("blog", { blog, isLoggedIn });
+  return res.render("blog", { blog: blog, isLoggedIn });
 };
 
 module.exports = {

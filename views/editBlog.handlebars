@@ -1,2 +1,32 @@
 {{> privateNavBar}}
-<h2>Edit {{blog.title}}</h2>
+<h2 class="text-center">Edit Blog</h2>
+
+<div class="card m-4" id="bp-blog">
+  <div class="card-header">
+    <h6 class="selected-blog" id="{{blog.id}}">{{blog.title}}</h6>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{blog.content}}</p>
+      <footer class="blockquote-footer">{{blog.user.username}}
+        <cite title="Source Title">{{ formatDate blog.createdAt}}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+
+<div class="mb-3 text-center">
+    <a class="btn btn-primary btn-lg mb-2" href="/create" role="button">Update</a>
+
+    <a class="btn btn-primary btn-lg mb-2"  role="button">Delete</a>
+</div>
+
+
+
+<section class="mt-3">
+    <h2 class="text-center">Comments</h2>
+    <hr />
+
+   {{#each comments as |comment|}}
+      {{> allComments}}
+    {{/each}}
+  </section>

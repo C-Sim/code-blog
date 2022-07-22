@@ -20,4 +20,4 @@ Blog.hasMany(Comment, {
   foreignKey: "blogId",
 });
 
-module.exports = { User, Blog };
+module.exports = { User, Blog, Comment };

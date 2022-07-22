@@ -1,4 +1,4 @@
-const { Blog } = require("../../models");
+const { Blog, Comment } = require("../../models");
 
 const renderDashboardPage = async (req, res) => {
   try {
@@ -33,4 +33,28 @@ const renderCreateBlogPage = async (req, res) => {
   }
 };
 
-module.exports = { renderDashboardPage, renderCreateBlogPage };
+const renderEditBlogPage = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const blogFromDb = await Blog.findByPk(id, {
+      include: [
+        // {
+        //   model: Comment,
+        // },
+      ],
+    });
+
+    const blog = blogFromDb.get({ plain: true });
+
+    return res.render("editBlog", { blog: blog });
+  } catch (error) {
+    return res.status(500).json({ message: `ERROR | ${error.message}` });
+  }
+};
+
+module.exports = {
+  renderDashboardPage,
+  renderCreateBlogPage,
+  renderEditBlogPage,
+};

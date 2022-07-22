@@ -159,31 +159,7 @@ const handleViewBlog = async (event) => {
     blogId = target.attr("id");
   }
 
-  const payload = {
-    blogId,
-  };
-
-  console.log(payload);
-
-  try {
-    const response = await fetch(`/blog/${blogId}`, {
-      method: "GET",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      return res.render("blog", { blog: data });
-    } else {
-      renderError("blog-error", "Failed to retrieve blog. Please try again.");
-    }
-  } catch (error) {
-    renderError("blog-error", "Failed to retrieve blog. Please try again.");
-  }
+  window.location.assign(`/blog/${blogId}`);
 };
 
 handleCreateBlog = async (event) => {
