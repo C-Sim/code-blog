@@ -1,4 +1,4 @@
-const { Blog, User } = require("../../models");
+const { Blog, User, Comment } = require("../../models");
 
 const renderLoginPage = (req, res) => {
   return res.render("login", { currentPage: "login" });
@@ -22,7 +22,7 @@ const renderHomePage = async (req, res) => {
     });
 
     if (!blogsFromDb) {
-      return res.status(500).json({ message: "No blogs found" });
+      return res.status(500).json({ message: "Blogs not found" });
     }
 
     const blogs = blogsFromDb.map((blog) => {
@@ -48,14 +48,16 @@ const renderBlogPage = async (req, res) => {
     include: [
       {
         model: User,
-        attributes: ["id", "username"],
+      },
+      {
+        model: Comment,
       },
     ],
   });
 
-  // const blog = blogFromDb.get({ plain: true });
+  const blog = blogFromDb.get({ plain: true });
 
-  // return res.render("blog", { blog: blog, isLoggedIn });
+  return res.render("blog", { blog, isLoggedIn });
 };
 
 module.exports = {

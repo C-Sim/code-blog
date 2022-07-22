@@ -2,16 +2,27 @@
     {{>privateNavBar}}
 {{else}}
     {{publicNavBar}}
+{{/if}}
 
-<div class="card m-4" id="hp-blog">
+
+<div class="card m-4" id="bp-blog">
   <div class="card-header">
-    <a class="blog-title" id="{{id}}">{{title}}</a>
+    <h6 class="selected-blog" id="{{blog.id}}">{{blog.title}}</h6>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p>{{content}}</p>
-      <footer class="blockquote-footer">{{user.username}}
-        <cite title="Source Title">{{formatDate createdAt}}</cite></footer>
+      <p>{{blog.content}}</p>
+      <footer class="blockquote-footer">{{blog.user.username}}
+        <cite title="Source Title">{{ formatDate blog.createdAt}}</cite></footer>
     </blockquote>
   </div>
 </div>
+
+<section class="mt-3">
+    <h2 class="text-center">Comments</h2>
+    <hr />
+
+   {{#each comments as |comment|}}
+      {{> allComments}}
+    {{/each}}
+  </section>

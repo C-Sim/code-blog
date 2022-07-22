@@ -155,7 +155,7 @@ const handleViewBlog = async (event) => {
 
   let blogId;
 
-  if (target.is('a[class="blog-title"]')) {
+  if (target.is('a[name="blog-title"]')) {
     blogId = target.attr("id");
   }
 
@@ -163,9 +163,11 @@ const handleViewBlog = async (event) => {
     blogId,
   };
 
+  console.log(payload);
+
   try {
-    const response = await fetch(`/${blogId}`, {
-      method: "POST",
+    const response = await fetch(`/blog/${blogId}`, {
+      method: "GET",
       body: JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-const { Blog, User } = require("../../models");
+const { Blog } = require("../../models");
 
 const renderDashboardPage = async (req, res) => {
   try {
