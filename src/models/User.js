@@ -28,16 +28,10 @@ const schema = {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    // validate: {
-    //   isAlphaNumeric: true,
-    // },
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    // validate: {
-    //   isAlphaNumeric: true,
-    // },
   },
 };
 

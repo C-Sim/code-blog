@@ -49,9 +49,9 @@ const renderBlogPage = async (req, res) => {
       {
         model: User,
       },
-      {
-        model: Comment,
-      },
+      // {
+      //   model: Comment,
+      // },
     ],
   });
 
