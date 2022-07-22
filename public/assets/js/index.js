@@ -1,6 +1,8 @@
 const signupForm = $("#signup-form");
 const loginForm = $("#login-form");
 const logoutBtn = $("#logout-btn");
+const hpBlog = $("#hp-blog");
+const blogCreateForm = $("#blog-create-form");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -27,13 +29,13 @@ const handleSignUp = async (event) => {
   }
 };
 
-// const renderError = (id, message) => {
-//   const errorDiv = $(`#${id}`);
-//   errorDiv.empty();
-//   errorDiv.append(`<div class="mb-3 text-center text-danger error-text">
-//     ${message}
-//   </div>`);
-// };
+const renderError = (id, message) => {
+  const errorDiv = $(`#${id}`);
+  errorDiv.empty();
+  errorDiv.append(`<div class="mb-3 text-center text-danger error-text">
+    ${message}
+  </div>`);
+};
 
 // const handleSignup = async (event) => {
 //   event.preventDefault();
@@ -148,6 +150,84 @@ const handleLogout = async () => {
   }
 };
 
+const handleViewBlog = async (event) => {
+  const target = $(event.target);
+
+  let blogId;
+
+  if (target.is('a[class="blog-title"]')) {
+    blogId = target.attr("id");
+  }
+
+  const payload = {
+    blogId,
+  };
+
+  try {
+    const response = await fetch(`/${blogId}`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      return res.render("blog", { blog: data });
+    } else {
+      renderError("blog-error", "Failed to retrieve blog. Please try again.");
+    }
+  } catch (error) {
+    renderError("blog-error", "Failed to retrieve blog. Please try again.");
+  }
+};
+
+handleCreateBlog = async (event) => {
+  event.preventDefault();
+
+  const title = $("#title").val().trim();
+  const content = $("#content").val().trim();
+
+  if (title && content) {
+    try {
+      const payload = {
+        title,
+        content,
+      };
+
+      const response = await fetch("/api/blogs", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        window.location.assign("/dashboard");
+      } else {
+        renderError(
+          "create-error",
+          "Failed to create a new blog. Please try again."
+        );
+      }
+    } catch (error) {
+      renderError(
+        "create-error",
+        "Failed to create a new blog. Please try again."
+      );
+    }
+  } else {
+    renderError("create-error", "Please complete all required fields.");
+  }
+};
+
 signupForm.submit(handleSignUp);
 loginForm.submit(handleLogin);
 logoutBtn.click(handleLogout);
+hpBlog.click(handleViewBlog);
+blogCreateForm.submit(handleCreateBlog);

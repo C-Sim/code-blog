@@ -1,0 +1,17 @@
+:root {
+  --powder-blue: #b8d8d8ff;
+  --cadet-blue: #c8c8c8;
+  --deep-space-sparkle: #4f6367ff;
+  --beige: #eef5dbff;
+  --orange-red-crayola: #fe5f55ff;
+}
+
+.blog-title {
+  color: var(--deep-space-sparkle);
+  text-decoration: none;
+}
+
+.blog-title:hover {
+  color: var(--orange-red-crayola);
+  cursor: pointer;
+}

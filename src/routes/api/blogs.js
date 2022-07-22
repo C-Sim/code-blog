@@ -10,7 +10,7 @@ const {
 } = require("../../controllers/api/blogs");
 
 router.get("/", getBlogs);
-router.get("/:id", getBlogsByUserId);
+router.get("/user/:id", getBlogsByUserId);
 router.get("/:id", getBlogById);
 router.post("/", createBlog);
 router.put("/:id", updateBlogById);

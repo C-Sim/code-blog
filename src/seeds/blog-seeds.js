@@ -35,13 +35,13 @@ const blogData = [
   {
     title: "Too many cooks",
     content:
-      "The novelty of working as a gorup definitely wears off over time. Especially with last-minute merge conflicts when working from a single GitHub repo. Lesson learnt for next time!",
+      "The novelty of working as a group definitely wears off over time. Especially with last-minute merge conflicts when working from a single GitHub repo. Lesson learnt for next time!",
     userId: 3,
   },
   {
     title: "Hoping for the best, but expecting the worst",
     content:
-      "Getting stuck into my second big group project. REally looking forward to working with a new team, but apprehensive about how it will go.",
+      "Getting stuck into my second big group project. Really looking forward to working with a new team, but apprehensive about how it will go.",
     userId: 4,
   },
   {

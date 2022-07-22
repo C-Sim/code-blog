@@ -2,43 +2,46 @@ const { Blog } = require("../../models");
 
 const getBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.findAll();
+    const blogsFromDb = await Blog.findAll();
 
-    if (!blogs) {
+    if (!blogsFromDb) {
       return res.status(500).json({ message: "No blogs found" });
     }
 
-    // const formatBlogs = (each) => {
-    //   const id = each.id;
-    //   const title = each.title;
-    //   const content = each.content;
-    //   const userId = each.userId;
-    //   const timestamp = each.createdAt;
+    const formatBlogs = (each) => {
+      const id = each.id;
+      const title = each.title;
+      const content = each.content;
+      const userId = each.userId;
+      const createdAt = each.createdAt;
 
-    //   const response = {
-    //     id,
-    //     title,
-    //     content,
-    //     userId,
-    //     timestamp,
-    //   };
-    //   return response;
-    // };
+      blogs = {
+        id,
+        title,
+        content,
+        userId,
+        createdAt,
+      };
+
+      return blogs;
+    };
 
     return res.json({
       success: true,
       data: blogs,
     });
   } catch (error) {
-    console.error(`ERROR | ${error.message}`);
+    console.error(`[ERROR]: Failed to get blogs | ${error.message}`);
     return res.status(500).json(error);
   }
 };
 
+// TODO - needed here or cover in dashboard?
 const getBlogsByUserId = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const blogs = await Blog.findOne({ where: { userId } });
+    const { userId } = req.session.id;
+
+    const blogs = await Blog.findAll({ where: { userId } });
     if (!blog) {
       return res.status(500).json({ message: "No blogs found" });
     }
@@ -47,8 +50,9 @@ const getBlogsByUserId = async (req, res) => {
       data: blogs,
     });
   } catch (error) {
-    console.error(`ERROR | ${error.message}`);
-    return res.status(500).json(error);
+    console.error(`[ERROR]: Failed to get blogs | ${error.message}`);
+
+    return res.status(500).json({ success: false });
   }
 };
 
@@ -71,7 +75,9 @@ const getBlogById = async (req, res) => {
 
 const createBlog = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, content } = req.body;
+
+    const userId = req.session.user.id;
 
     const blog = await Blog.findOne({ where: { title } });
 
