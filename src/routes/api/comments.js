@@ -4,7 +4,7 @@ const {
   updateCommentById,
   addCommentToBlog,
   deleteCommentFromBlog,
-} = require("../../controllers/api/blogs");
+} = require("../../controllers/api/comments");
 
 router.post("/", addCommentToBlog);
 router.put("/:id", updateCommentById);

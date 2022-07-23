@@ -167,16 +167,15 @@ handleEditBlog = async (event) => {
 
   const target = $(event.target);
 
-  if (target.is('btn[id="delete-btn"]')) {
+  const blogId = target.attr("data-id");
+
+  console.log(blogId);
+
+  if (target.is('button[name="delete-btn"]')) {
     console.log("delete");
     try {
-      const payload = {
-        blogId,
-      };
-
       const response = await fetch(`/api/blogs/${blogId}`, {
         method: "DELETE",
-        body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
         },
@@ -192,7 +191,7 @@ handleEditBlog = async (event) => {
     } catch (error) {
       renderError("edit-error", "Failed to delete blog. Please try again.");
     }
-  } else if (target.is('btn[id="update-btn"]')) {
+  } else if (target.is('button[name="update-btn"]')) {
     const title = $("#title").val().trim();
     const content = $("#content").val().trim();
 
