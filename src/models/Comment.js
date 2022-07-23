@@ -22,6 +22,7 @@ const schema = {
   },
   userId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: "id",
@@ -29,6 +30,7 @@ const schema = {
   },
   blogId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     references: {
       model: Blog,
       key: "id",

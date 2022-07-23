@@ -113,7 +113,7 @@ const createBlog = async (req, res) => {
 
 const updateBlogById = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, content } = req.body;
     const { id } = req.params;
 
     const blog = await Blog.findOne({ where: { id } });

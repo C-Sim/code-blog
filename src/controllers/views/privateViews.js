@@ -39,9 +39,9 @@ const renderEditBlogPage = async (req, res) => {
 
     const blogFromDb = await Blog.findByPk(id, {
       include: [
-        // {
-        //   model: Comment,
-        // },
+        {
+          model: Comment,
+        },
       ],
     });
 
@@ -53,8 +53,19 @@ const renderEditBlogPage = async (req, res) => {
   }
 };
 
+const renderAddCommentPage = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    return res.render("addComment", { blogId: id });
+  } catch (error) {
+    return res.status(500).json({ message: `ERROR | ${error.message}` });
+  }
+};
+
 module.exports = {
   renderDashboardPage,
   renderCreateBlogPage,
   renderEditBlogPage,
+  renderAddCommentPage,
 };

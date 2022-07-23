@@ -49,13 +49,27 @@ const renderBlogPage = async (req, res) => {
       {
         model: User,
       },
-      // {
-      //   model: Comment,
-      // },
+      {
+        model: Comment,
+        attributes: ["content", "userId"],
+      },
     ],
   });
 
+  // const commentFromDb = await Comment.findAll(
+  //   { where: { blogId: id } },
+  //   {
+  //     include: [
+  //       {
+  //         model: User,
+  //       },
+  //     ],
+  //   }
+  // );
+
   const blog = blogFromDb.get({ plain: true });
+
+  // const comment = commentFromDb.get({ plain: true });
 
   return res.render("blog", { blog: blog, isLoggedIn });
 };
