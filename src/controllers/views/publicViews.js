@@ -42,22 +42,33 @@ const renderHomePage = async (req, res) => {
 const renderBlogPage = async (req, res) => {
   const { isLoggedIn } = req.session;
 
+  const currentUser = req.session.user.id;
+
   const { id } = req.params;
 
   const blogFromDb = await Blog.findByPk(id, {
     include: [
       {
         model: User,
+        attributes: ["username", "id"],
       },
       {
         model: Comment,
-        attributes: ["content", "userId"],
+        attributes: ["content", "userId", "createdAt", "id"],
+        include: [
+          {
+            model: User,
+            attributes: ["username", "id"],
+          },
+        ],
       },
     ],
   });
 
+  const blog = blogFromDb.get({ plain: true });
+
   // const commentFromDb = await Comment.findAll(
-  //   { where: { blogId: id } },
+  //   { where: { blogId: id, userId: blog.userId } },
   //   {
   //     include: [
   //       {
@@ -67,11 +78,15 @@ const renderBlogPage = async (req, res) => {
   //   }
   // );
 
-  const blog = blogFromDb.get({ plain: true });
-
   // const comment = commentFromDb.get({ plain: true });
 
-  return res.render("blog", { blog: blog, isLoggedIn });
+  console.log(blog);
+
+  return res.render("blog", {
+    blog: blog,
+    currentUser: currentUser,
+    isLoggedIn,
+  });
 };
 
 module.exports = {

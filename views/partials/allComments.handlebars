@@ -3,7 +3,32 @@
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{user.username}}</h5>
     </div>
-    <p class="mb-1">{{comment}}</p>
-    <small>{{createdAt}}</small>
+    {{#if (isEqualTo parent.currentUser user.id)}}
+    <input type="text"
+      class="form-control"
+      id="comment" 
+      value="{{comment.content}}">
+    </input>
+    {{else}}
+    <p class="mb-1">{{content}}</p>
+    {{/if}}
+
+    <small>{{formatDate createdAt}}</small>
+
+    {{#if (isEqualTo parent.currentUser user.id)}}
+    <button
+      type="submit"
+      name="update-comment-btn"
+      data-id="{{blog.id}}"
+      class="btn btn-secondary"
+    >Update</button>
+    <button
+      type="submit"
+      name="delete-comment-btn"
+      data-id="{{blog.id}}"
+      class="btn btn-danger"
+    >Delete</button>
+    {{/if}}
   </div>
+
 </div>

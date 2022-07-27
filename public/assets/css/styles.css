@@ -6,12 +6,44 @@
   --orange-red-crayola: #fe5f55ff;
 }
 
-.blog-title {
-  color: var(--deep-space-sparkle);
+.blog-title,
+.nav-item {
+  color: var(--cadet-blue);
+
   text-decoration: none;
 }
 
-.blog-title:hover {
+.blog-title:hover,
+.nav-item:hover,
+.btn:hover {
   color: var(--orange-red-crayola);
   cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--deep-space-sparkle);
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background-color: var(--cadet-blue);
+  color: var(--deep-space-sparkle);
+}
+
+.navbar,
+.card-header,
+.btn {
+  background-color: var(--deep-space-sparkle);
+  color: var(--cadet-blue);
+  border: 0;
+}
+
+.card-body {
+  background-color: var(--beige);
+  color: var(--deep-space-sparkle);
+}
+
+.blockquote-footer {
+  color: var(--cadet-blue);
 }

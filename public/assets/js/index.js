@@ -3,7 +3,8 @@ const loginForm = $("#login-form");
 const logoutBtn = $("#logout-btn");
 const hpBlog = $("#hp-blog");
 const blogCreateForm = $("#blog-create-form");
-const editBlog = $("#blog-edit-form");
+const updateBlog = $("#blog-edit-form");
+const deleteBlog = $("#delete-blog-btn");
 const addComment = $("#comment-form");
 
 const renderError = (id, message) => {
@@ -118,7 +119,7 @@ const handleViewBlog = async (event) => {
   window.location.assign(`/blog/${blogId}`);
 };
 
-handleCreateBlog = async (event) => {
+const handleCreateBlog = async (event) => {
   event.preventDefault();
 
   const title = $("#title").val().trim();
@@ -160,22 +161,34 @@ handleCreateBlog = async (event) => {
   }
 };
 
-handleEditBlog = async (event) => {
+const handleEditBlog = async (event) => {
   event.preventDefault();
 
-  console.log("click");
-
   const target = $(event.target);
+  const currentTarget = $(event.currentTarget);
+
+  console.log(target);
+  console.log(currentTarget);
 
   const blogId = target.attr("data-id");
 
   console.log(blogId);
 
-  if (target.is('button[name="delete-btn"]')) {
-    console.log("delete");
+  const title = $("#title").val().trim();
+  const content = $("#content").val().trim();
+
+  if (title && content) {
+    console.log("update");
+
     try {
+      const payload = {
+        title,
+        content,
+      };
+
       const response = await fetch(`/api/blogs/${blogId}`, {
-        method: "DELETE",
+        method: "PUT",
+        body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
         },
@@ -186,49 +199,55 @@ handleEditBlog = async (event) => {
       if (data.success) {
         window.location.assign("/dashboard");
       } else {
-        renderError("edit-error", "Failed to delete blog. Please try again.");
-      }
-    } catch (error) {
-      renderError("edit-error", "Failed to delete blog. Please try again.");
-    }
-  } else if (target.is('button[name="update-btn"]')) {
-    const title = $("#title").val().trim();
-    const content = $("#content").val().trim();
-
-    if (title && content) {
-      console.log("update");
-
-      try {
-        const payload = {
-          title,
-          content,
-        };
-
-        const response = await fetch(`/api/blogs/${blogId}`, {
-          method: "PUT",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          window.location.assign("/dashboard");
-        } else {
-          renderError("edit-error", "Failed to update blog. Please try again.");
-        }
-      } catch (error) {
         renderError("edit-error", "Failed to update blog. Please try again.");
       }
+    } catch (error) {
+      renderError("edit-error", "Failed to update blog. Please try again.");
+    }
+
+    // not picking up after here
+    if (target.is('button[name="delete-btn"]')) {
+    } else if (target.is('button[name="update-btn"]')) {
     } else {
       renderError("edit-error", "Please complete all required fields.");
     }
   }
 };
 
-handleAddComment = async (event) => {
+const handleDeleteBlog = async (event) => {
+  console.log("delete");
+
+  const target = $(event.target);
+  // const currentTarget = $(event.currentTarget);
+
+  console.log(target);
+  // console.log(currentTarget);
+
+  const blogId = target.attr("data-id");
+
+  console.log(blogId);
+
+  try {
+    const response = await fetch(`/api/blogs/${blogId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      window.location.assign("/dashboard");
+    } else {
+      renderError("edit-error", "Failed to delete blog. Please try again.");
+    }
+  } catch (error) {
+    renderError("edit-error", "Failed to delete blog. Please try again.");
+  }
+};
+
+const handleAddComment = async (event) => {
   event.preventDefault();
 
   const target = $(event.target);
@@ -275,5 +294,6 @@ loginForm.submit(handleLogin);
 logoutBtn.click(handleLogout);
 hpBlog.click(handleViewBlog);
 blogCreateForm.submit(handleCreateBlog);
-editBlog.submit(handleEditBlog);
+updateBlog.submit(handleEditBlog);
 addComment.submit(handleAddComment);
+deleteBlog.click(handleDeleteBlog);
