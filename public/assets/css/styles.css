@@ -45,6 +45,10 @@ body {
   border: 0;
 }
 
+.btn-danger {
+  background-color: var(--orange-red-crayola);
+}
+
 .card-body {
   background-color: var(--beige);
   color: var(--deep-space-sparkle);

@@ -5,9 +5,10 @@
     </div>
     {{#if (isEqualTo parent.currentUser user.id)}}
     <input type="text"
-      class="form-control"
+      class="form-control mb-2"
       id="comment" 
-      value="{{comment.content}}">
+      value="{{content}}"
+      placeholder="Enter comment">
     </input>
     {{else}}
     <p class="mb-1">{{content}}</p>
@@ -16,18 +17,20 @@
     
 
     {{#if (isEqualTo parent.currentUser user.id)}}
+    <div class="d-flex justify-content-center">
     <button
       type="submit"
       name="update-comment-btn"
       data-id="{{blog.id}}"
-      class="btn btn-secondary"
+      class="btn btn-secondary m-1"
     >Update</button>
     <button
       type="submit"
       name="delete-comment-btn"
       data-id="{{blog.id}}"
-      class="btn btn-danger"
+      class="btn btn-danger m-1"
     >Delete</button>
+    </div>
     {{/if}}
   </div>
 

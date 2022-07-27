@@ -42,7 +42,11 @@ const renderHomePage = async (req, res) => {
 const renderBlogPage = async (req, res) => {
   const { isLoggedIn } = req.session;
 
-  const currentUser = req.session.user.id;
+  let currentUser;
+
+  if (isLoggedIn) {
+    currentUser = req.session.user.id;
+  }
 
   const { id } = req.params;
 
@@ -66,21 +70,6 @@ const renderBlogPage = async (req, res) => {
   });
 
   const blog = blogFromDb.get({ plain: true });
-
-  // const commentFromDb = await Comment.findAll(
-  //   { where: { blogId: id, userId: blog.userId } },
-  //   {
-  //     include: [
-  //       {
-  //         model: User,
-  //       },
-  //     ],
-  //   }
-  // );
-
-  // const comment = commentFromDb.get({ plain: true });
-
-  console.log(blog);
 
   return res.render("blog", {
     blog: blog,

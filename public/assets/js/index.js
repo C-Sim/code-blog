@@ -165,10 +165,6 @@ const handleEditBlog = async (event) => {
   event.preventDefault();
 
   const target = $(event.target);
-  const currentTarget = $(event.currentTarget);
-
-  console.log(target);
-  console.log(currentTarget);
 
   const blogId = target.attr("data-id");
 
@@ -204,13 +200,8 @@ const handleEditBlog = async (event) => {
     } catch (error) {
       renderError("edit-error", "Failed to update blog. Please try again.");
     }
-
-    // not picking up after here
-    if (target.is('button[name="delete-btn"]')) {
-    } else if (target.is('button[name="update-btn"]')) {
-    } else {
-      renderError("edit-error", "Please complete all required fields.");
-    }
+  } else {
+    renderError("edit-error", "Please complete all required fields.");
   }
 };
 
