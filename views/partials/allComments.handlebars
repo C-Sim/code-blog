@@ -1,7 +1,7 @@
-<div class="list-group">
+<div class="list-group comment-group">
   <div class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{user.username}}</h5>
+      <h6 class="mb-1">{{user.username}}</h6><small>{{formatDate createdAt}}</small>
     </div>
     {{#if (isEqualTo parent.currentUser user.id)}}
     <input type="text"
@@ -13,7 +13,7 @@
     <p class="mb-1">{{content}}</p>
     {{/if}}
 
-    <small>{{formatDate createdAt}}</small>
+    
 
     {{#if (isEqualTo parent.currentUser user.id)}}
     <button

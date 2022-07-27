@@ -254,7 +254,7 @@ const handleAddComment = async (event) => {
 
   const blogId = target.attr("data-id");
 
-  const content = $("#comment").val().trim();
+  const content = $("#comment-input").val().trim();
 
   if (content) {
     try {

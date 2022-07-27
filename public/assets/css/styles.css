@@ -6,6 +6,19 @@
   --orange-red-crayola: #fe5f55ff;
 }
 
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background-color: var(--cadet-blue);
+  color: var(--deep-space-sparkle);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .blog-title,
 .nav-item {
   color: var(--cadet-blue);
@@ -24,13 +37,6 @@
   background-color: var(--deep-space-sparkle);
 }
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-  background-color: var(--cadet-blue);
-  color: var(--deep-space-sparkle);
-}
-
 .navbar,
 .card-header,
 .btn {
@@ -46,4 +52,26 @@ body {
 
 .blockquote-footer {
   color: var(--cadet-blue);
+}
+
+#comment-input {
+  width: 50%;
+}
+
+.comment-group {
+  margin: 18px;
+}
+
+.footer {
+  background-color: var(--deep-space-sparkle);
+  color: var(--cadet-blue);
+  text-align: center;
+  padding: 8px;
+  width: 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .footer {
+    font-size: 12px;
+  }
 }
