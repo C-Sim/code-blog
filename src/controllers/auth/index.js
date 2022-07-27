@@ -4,9 +4,9 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // if (!user || !password) {
-    //   renderError("signup-error", "Please complete all required fields.");
-    // }
+    if (!username || !password) {
+      renderError("signup-error", "Please complete all required fields.");
+    }
 
     const user = await User.findOne({ where: { username } });
 

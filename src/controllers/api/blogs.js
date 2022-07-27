@@ -36,7 +36,6 @@ const getBlogs = async (req, res) => {
   }
 };
 
-// TODO - needed here or cover in dashboard?
 const getBlogsByUserId = async (req, res) => {
   try {
     const { userId } = req.session.id;

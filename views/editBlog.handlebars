@@ -1,6 +1,6 @@
 {{> privateNavBar}}
 
-<section class="mt-4 border p-3 rounded-2 bg-light">
+<section class="m-4  p-3 rounded-2 ">
   <h2 class="text-center">Edit Blog</h2>
 
   <form class="mt-4" id="blog-edit-form" data-id="{{blog.id}}">
@@ -42,9 +42,13 @@
 
 <section class="mt-3">
     <h2 class="text-center">Comments</h2>
-    <hr />
 
-   {{#each comments as |comment|}}
-      {{> allComments}}
-    {{/each}}
+{{#if blog.comments.length}}
+{{#each blog.comments as |comment|}}   
+   {{> allComments }}
+{{/each}}
+{{else}}
+<p class="text-center">No Comments Yet</p>
+{{/if}}
+
   </section>

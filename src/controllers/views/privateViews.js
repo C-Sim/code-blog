@@ -1,4 +1,4 @@
-const { Blog, Comment } = require("../../models");
+const { Blog, Comment, User } = require("../../models");
 
 const renderDashboardPage = async (req, res) => {
   try {
@@ -40,7 +40,18 @@ const renderEditBlogPage = async (req, res) => {
     const blogFromDb = await Blog.findByPk(id, {
       include: [
         {
+          model: User,
+          attributes: ["username", "id"],
+        },
+        {
           model: Comment,
+          attributes: ["content", "userId", "createdAt", "id"],
+          include: [
+            {
+              model: User,
+              attributes: ["username", "id"],
+            },
+          ],
         },
       ],
     });

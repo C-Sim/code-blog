@@ -22,7 +22,7 @@
 
 <h4 class="text-center">Add a Comment</h4>
 
-  <form  data-id="{{id}}" id="comment-form">
+  <form  data-id="{{blog.id}}" id="comment-form">
 
     <div class=" d-flex justify-content-center">
       <textarea
@@ -48,8 +48,12 @@
         <p class="text-center"><a href="/login">Login</a> to add, edit or delete your comments and posts</p>
     {{/unless}}
 
+{{#if blog.comments.length}}
 {{#each blog.comments as |comment|}}   
    {{> allComments parent=../this}}
 {{/each}}
+{{else}}
+<p class="text-center">No Comments Yet</p>
+{{/if}}
 
   </section>

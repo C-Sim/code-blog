@@ -6,6 +6,8 @@ const blogCreateForm = $("#blog-create-form");
 const updateBlog = $("#blog-edit-form");
 const deleteBlog = $("#delete-blog-btn");
 const addComment = $("#comment-form");
+const updateComment = $("#comment-edit-form");
+const deleteComment = $("#delete-comment-btn");
 
 const renderError = (id, message) => {
   const errorDiv = $(`#${id}`);
@@ -168,14 +170,10 @@ const handleEditBlog = async (event) => {
 
   const blogId = target.attr("data-id");
 
-  console.log(blogId);
-
   const title = $("#title").val().trim();
   const content = $("#content").val().trim();
 
   if (title && content) {
-    console.log("update");
-
     try {
       const payload = {
         title,
@@ -206,17 +204,9 @@ const handleEditBlog = async (event) => {
 };
 
 const handleDeleteBlog = async (event) => {
-  console.log("delete");
-
   const target = $(event.target);
-  // const currentTarget = $(event.currentTarget);
-
-  console.log(target);
-  // console.log(currentTarget);
 
   const blogId = target.attr("data-id");
-
-  console.log(blogId);
 
   try {
     const response = await fetch(`/api/blogs/${blogId}`, {
@@ -238,7 +228,7 @@ const handleDeleteBlog = async (event) => {
   }
 };
 
-const handleAddComment = async (event) => {
+const handleAddComment = async (event, req, res) => {
   event.preventDefault();
 
   const target = $(event.target);
@@ -265,7 +255,7 @@ const handleAddComment = async (event) => {
       const data = await response.json();
 
       if (data.success) {
-        window.location.assign("/home");
+        window.location.assign(`/blog/${blogId}`);
       } else {
         renderError(
           "comment-error",
@@ -280,11 +270,90 @@ const handleAddComment = async (event) => {
   }
 };
 
+const handleEditComment = async (event) => {
+  event.preventDefault();
+
+  const target = $(event.target);
+
+  // const blogId = target.attr("data-id");
+
+  const commentId = target.attr("data-id");
+
+  const content = $("#comment").val().trim();
+
+  if (content) {
+    console.log("update");
+
+    try {
+      const payload = {
+        content,
+      };
+
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // window.location.assign(`/blog/${blogId}`);
+      } else {
+        renderError(
+          "comment-edit-error",
+          "Failed to update comment. Please try again."
+        );
+      }
+    } catch (error) {
+      renderError(
+        "comment-edit-error",
+        "Failed to update comment. Please try again."
+      );
+    }
+  } else {
+    renderError("comment-edit-error", "Please complete all required fields.");
+  }
+};
+
+const handleDeleteComment = async (event) => {
+  const target = $(event.target);
+
+  // const blogId = target.attr("data-id");
+
+  const commentId = target.attr("data-id");
+
+  console.log(commentId);
+
+  try {
+    const response = await fetch(`/api/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // window.location.assign(`/blog/${blogId}`);
+    } else {
+      renderError("edit-error", "Failed to delete comment. Please try again.");
+    }
+  } catch (error) {
+    renderError("edit-error", "Failed to delete comment. Please try again.");
+  }
+};
+
 signupForm.submit(handleSignUp);
 loginForm.submit(handleLogin);
 logoutBtn.click(handleLogout);
 hpBlog.click(handleViewBlog);
 blogCreateForm.submit(handleCreateBlog);
 updateBlog.submit(handleEditBlog);
-addComment.submit(handleAddComment);
 deleteBlog.click(handleDeleteBlog);
+addComment.submit(handleAddComment);
+updateComment.submit(handleEditComment);
+deleteComment.click(handleDeleteComment);
