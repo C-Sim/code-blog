@@ -58,12 +58,16 @@ const renderBlogPage = async (req, res) => {
       },
       {
         model: Comment,
-        attributes: ["content", "userId", "createdAt", "id"],
+        attributes: ["content", "userId", "blogId", "createdAt", "id"],
         include: [
           {
             model: User,
             attributes: ["username", "id"],
           },
+          // {
+          //   model: Blog,
+          //   attributes: "id",
+          // },
         ],
       },
     ],

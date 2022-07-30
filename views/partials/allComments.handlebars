@@ -4,7 +4,7 @@
       <h6 class="mb-1">{{user.username}}</h6><small>{{formatDate createdAt}}</small>
     </div>
     {{#if (isEqualTo parent.currentUser user.id)}}
-    <form class="mt-4" id="comment-edit-form" data-id="{{id}}">
+    <form class="mt-4" id="comment-edit-form" data-blog-id="{{blogId}}" data-id="{{id}}">
 
     <input type="text"
       class="form-control mb-2"
@@ -20,13 +20,13 @@
     <button
       type="submit"
       id="update-comment-btn"
-      data-id="{{id}}"
       class="btn btn-secondary m-1"
     >Update</button>
     <button
       type="button"
       id="delete-comment-btn"
       data-id="{{id}}"
+      data-blog-id="{{blogId}}"
       class="btn btn-danger m-1"
     >Delete</button>
     </div>

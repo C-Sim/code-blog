@@ -274,16 +274,20 @@ const handleEditComment = async (event) => {
   event.preventDefault();
 
   const target = $(event.target);
+  const currentTarget = $(event.currentTarget);
 
-  // const blogId = target.attr("data-id");
+  console.log(target);
+  console.log(currentTarget);
+
+  const blogId = target.attr("data-blog-id");
 
   const commentId = target.attr("data-id");
+
+  console.log(commentId);
 
   const content = $("#comment").val().trim();
 
   if (content) {
-    console.log("update");
-
     try {
       const payload = {
         content,
@@ -300,7 +304,7 @@ const handleEditComment = async (event) => {
       const data = await response.json();
 
       if (data.success) {
-        // window.location.assign(`/blog/${blogId}`);
+        window.location.assign(`/blog/${blogId}`);
       } else {
         renderError(
           "comment-edit-error",
@@ -321,7 +325,7 @@ const handleEditComment = async (event) => {
 const handleDeleteComment = async (event) => {
   const target = $(event.target);
 
-  // const blogId = target.attr("data-id");
+  const blogId = target.attr("data-blog-id");
 
   const commentId = target.attr("data-id");
 
@@ -338,7 +342,7 @@ const handleDeleteComment = async (event) => {
     const data = await response.json();
 
     if (data.success) {
-      // window.location.assign(`/blog/${blogId}`);
+      window.location.assign(`/blog/${blogId}`);
     } else {
       renderError("edit-error", "Failed to delete comment. Please try again.");
     }
