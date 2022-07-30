@@ -64,10 +64,6 @@ const renderBlogPage = async (req, res) => {
             model: User,
             attributes: ["username", "id"],
           },
-          // {
-          //   model: Blog,
-          //   attributes: "id",
-          // },
         ],
       },
     ],

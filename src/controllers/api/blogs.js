@@ -117,24 +117,10 @@ const updateBlogById = async (req, res) => {
 
     const blog = await Blog.findOne({ where: { id } });
 
-    const existingBlog = await Blog.findOne({
-      where: { title },
-    });
-
     if (!blog) {
       console.log(`[ERROR]: Failed to find blog | No blog with id of ${id}`);
 
       return res.status(404).json({ error: "Failed to find blog" });
-    }
-
-    if (existingBlog) {
-      console.log(
-        `[ERROR]: Failed to update blog | Blog of ${title} already exists`
-      );
-
-      return res.status(400).json({
-        error: `Failed to update blog | Blog of ${title} already exists`,
-      });
     }
 
     await Blog.update(

@@ -15,13 +15,13 @@
     </div>
 
     <div class="mb-3">
-      <input
+      <textarea
         type="content"
         class="form-control"
         id="content"
         value="{{blog.content}}"
         placeholder="Enter content"
-      />
+      >{{blog.content}}</textarea>
     </div>
 
     <div class="m-2">Created: {{ formatDate blog.createdAt}}</div>

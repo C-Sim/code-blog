@@ -180,6 +180,8 @@ const handleEditBlog = async (event) => {
         content,
       };
 
+      console.log(payload);
+
       const response = await fetch(`/api/blogs/${blogId}`, {
         method: "PUT",
         body: JSON.stringify(payload),
@@ -274,10 +276,6 @@ const handleEditComment = async (event) => {
   event.preventDefault();
 
   const target = $(event.target);
-  const currentTarget = $(event.currentTarget);
-
-  console.log(target);
-  console.log(currentTarget);
 
   const blogId = target.attr("data-blog-id");
 
@@ -323,6 +321,7 @@ const handleEditComment = async (event) => {
 };
 
 const handleDeleteComment = async (event) => {
+  event.preventDefault();
   const target = $(event.target);
 
   const blogId = target.attr("data-blog-id");

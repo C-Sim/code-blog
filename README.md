@@ -23,39 +23,26 @@ A full-stack CMS-style blog site similar to a Wordpress site, where developers c
 ## Screenshots
 
 <details>
-<summary>Homepage</summary>
+<summary>Homepage - Desktop</summary>
 
-![homepage](...)
-
-</details>
-
-<details>
-<summary>Login</summary>
-
-![Login](...)
+![homepage-dt](public/assets/screenshots/homepageDt.png)
 
 </details>
 
 <details>
-<summary>Sign up</summary>
+<summary>Homepage - Mobile</summary>
 
-![Sign up](...)
-
-</details>
-
-<details>
-<summary>Posts</summary>
-
-![Posts](...)
+![homepage-mob](public/assets/screenshots/homepageMob.png)
 
 </details>
 
 <details>
-<summary>Edit</summary>
+<summary>Single Blog</summary>
 
-![Edit](...)
+![single-blog](public/assets/screenshots/singleBlog.png)
 
 </details>
+
 </br>
 
 ## User Story
