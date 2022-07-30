@@ -275,11 +275,9 @@ const handleAddComment = async (event, req, res) => {
 const handleEditDeleteComment = async (event) => {
   event.preventDefault();
   const target = $(event.target);
-
   const blogId = target.attr("data-blog-id");
-
   const commentId = target.attr("data-id");
-  const content = $("#comment").val().trim();
+  const content = $(`#comment-${commentId}`).val().trim();
 
   if (target.is('button[name="update-comment-btn"]')) {
     handleUpdateComment(content, blogId, commentId);
@@ -325,19 +323,29 @@ const handleUpdateComment = async (content, blogId, commentId) => {
   }
 };
 
-const handleDeleteComment = async (event) => {
-  event.preventDefault();
-  const target = $(event.target);
-  try {
-    const data = await response.json();
+const handleDeleteComment = async (blogId, commentId) => {
+  if (blogId && commentId) {
+    try {
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (data.success) {
-      window.location.assign(`/blog/${blogId}`);
-    } else {
+      const data = await response.json();
+
+      if (data.success) {
+        window.location.assign(`/blog/${blogId}`);
+      } else {
+        renderError(
+          "edit-error",
+          "Failed to delete comment. Please try again."
+        );
+      }
+    } catch (error) {
       renderError("edit-error", "Failed to delete comment. Please try again.");
     }
-  } catch (error) {
-    renderError("edit-error", "Failed to delete comment. Please try again.");
   }
 };
 
