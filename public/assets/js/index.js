@@ -280,14 +280,14 @@ const handleEditDeleteComment = async (event) => {
   const content = $(`#comment-${commentId}`).val().trim();
 
   if (target.is('button[name="update-comment-btn"]')) {
-    handleUpdateComment(content, blogId, commentId);
+    handleEditComment(content, blogId, commentId);
   }
 
   if (target.is('button[name="delete-comment-btn"]')) {
     handleDeleteComment(blogId, commentId);
   }
 };
-const handleUpdateComment = async (content, blogId, commentId) => {
+const handleEditComment = async (content, blogId, commentId) => {
   if (content && blogId && commentId) {
     try {
       const payload = {
@@ -358,4 +358,3 @@ updateBlog.submit(handleEditBlog);
 deleteBlog.click(handleDeleteBlog);
 addComment.submit(handleAddComment);
 updateComment.click(handleEditDeleteComment);
-// deleteComment.click(handleDeleteComment);
