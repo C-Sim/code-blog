@@ -180,7 +180,6 @@ const handleEditBlog = async (event) => {
         content,
       };
 
-      console.log(payload);
 
       const response = await fetch(`/api/blogs/${blogId}`, {
         method: "PUT",
