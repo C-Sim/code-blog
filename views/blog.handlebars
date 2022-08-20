@@ -1,0 +1,61 @@
+{{#if isLoggedIn}}
+    {{>privateNavBar}}
+{{else}}
+    {{>publicNavBar}}
+{{/if}}
+
+
+<div class="card m-4" id="bp-blog">
+  <div class="card-header">
+    <h6 class="selected-blog" id="{{blog.id}}">{{blog.title}}</h6>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{blog.content}}</p>
+      <footer class="blockquote-footer">{{blog.user.username}}
+        <cite title="Source Title">{{ formatDate blog.createdAt}}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+
+{{#if isLoggedIn}}
+
+<h4 class="text-center">Add a Comment</h4>
+
+  <form  data-id="{{blog.id}}" id="comment-form">
+
+    <div class=" d-flex justify-content-center">
+      <textarea
+        type="text"
+        class="form-control"
+        id="comment-input"
+        placeholder="Enter comment"
+      ></textarea>
+    </div>
+
+    <div id="comment-error"></div>
+
+    <div class="mb-4 text-center">
+        <button type="submit" class="btn btn-primary btn-lg mt-4" id="add-comment-btn"  data-id="{{blog.id}}" >Add Comment</button>
+    </div>
+  </form>
+{{/if}}
+
+
+<section class="mt-4">
+    <h2 class="text-center">Comments</h2>
+    {{#unless isLoggedIn}}
+        <p class="text-center"><a href="/login">Login</a> to add, edit or delete your comments and posts</p>
+    {{/unless}}
+
+  <form class="mt-4" id="comment-edit-form">
+{{#if blog.comments.length}}
+{{#each blog.comments as |comment|}}   
+   {{> allComments parent=../this}}
+{{/each}}
+{{else}}
+<p class="text-center">No Comments Yet</p>
+{{/if}}
+</form>
+
+  </section>

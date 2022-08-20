@@ -1,0 +1,15 @@
+{{#if isLoggedIn}}
+  {{> privateNavBar}}
+{{else}}
+  {{> publicNavBar}}
+{{/if}}
+
+<h2 class="text-center mt-3">All Blogs</h2>
+
+<div id="hp-blog">
+
+{{#each blogs as |blog|}}
+  {{> allBlogs}}
+{{/each}}
+
+</div>

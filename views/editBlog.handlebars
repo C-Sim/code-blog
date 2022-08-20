@@ -1,0 +1,54 @@
+{{> privateNavBar}}
+
+<section class="m-4  p-3 rounded-2 ">
+  <h2 class="text-center">Edit Blog</h2>
+
+  <form class="mt-4" id="blog-edit-form" data-id="{{blog.id}}">
+    <div class="mb-3">
+      <input
+        type="title"
+        class="form-control"
+        id="title"
+        value="{{blog.title}}"
+        placeholder="Enter title"
+      />
+    </div>
+
+    <div class="mb-3">
+      <textarea
+        type="content"
+        class="form-control"
+        id="content"
+        value="{{blog.content}}"
+        placeholder="Enter content"
+      >{{blog.content}}</textarea>
+    </div>
+
+    <div class="m-2">Created: {{ formatDate blog.createdAt}}</div>
+    <div class="m-2">Updated: {{ formatDate blog.updatedAt}}</div>
+
+
+    <div id="edit-error"></div>
+
+    <div class="mb-3 text-center">
+        <button type="submit" name="update-blog-btn" data-id="{{blog.id}}" class="btn btn-secondary">Update</button>
+        <button type="button" id="delete-blog-btn" data-id="{{blog.id}}" class="btn btn-danger">Delete</button>
+    </div>
+
+  </form>
+</section>
+
+
+
+<section class="mt-3">
+    <h2 class="text-center">Comments</h2>
+
+{{#if blog.comments.length}}
+{{#each blog.comments as |comment|}}   
+   {{> allComments }}
+{{/each}}
+{{else}}
+<p class="text-center">No Comments Yet</p>
+{{/if}}
+
+  </section>

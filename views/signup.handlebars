@@ -1,0 +1,45 @@
+{{> publicNavBar}}
+<div class="container">
+  <section class="mt-4 border p-3 rounded-2 bg-light">
+    <h2 class="text-center">Sign Up</h2>
+    <p class="text-center">Create an account to access the dashboard and our full suite of blog features.</p>
+
+    <hr />
+    <form class="mt-4" id="signup-form">
+      <div class="mb-3">
+        <input
+          type="username"
+          class="form-control"
+          id="username"
+          placeholder="Enter username"
+        />
+      </div>
+            
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Enter password between 6-18 characters long and containing at least one number"
+          pattern="^(?=.*\d).{6,18}$"        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          placeholder="Confirm password"
+        />
+      </div>
+      
+      <div id="signup-error"></div>
+      <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+      <div class="mb-3 text-center error-text">
+        Already have an account?
+        <a href="/login">Login here.</a>
+      </div>
+    </form>
+  </section>
+</div>

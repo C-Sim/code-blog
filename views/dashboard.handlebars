@@ -1,0 +1,18 @@
+{{> privateNavBar}}
+<h2 class="text-center mt-3">My Blogs</h2>
+
+{{#if blogs.length}}
+{{#each blogs as |blog|}}
+  {{> myBlogs}}
+{{/each}}
+{{else}}
+<p class="text-center">No Blogs Yet</p>
+{{/if}}
+
+
+
+
+
+    <div class="mb-3 text-center">
+        <a class="btn btn-primary btn-lg mt-4" href="/create" role="button">Create New Blog</a>
+    </div>

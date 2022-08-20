@@ -1,0 +1,32 @@
+{{> privateNavBar}}
+
+<section class="m-4 p-3 rounded-2">
+  <h2 class="text-center">Create Blog</h2>
+
+  <form class="mt-4" id="blog-create-form">
+    <div class="mb-3">
+      <input
+        type="title"
+        class="form-control"
+        id="title"
+        placeholder="Enter title"
+      />
+    </div>
+
+    <div class="mb-3">
+      <textarea
+        type="text"
+        class="form-control"
+        id="content"
+        placeholder="Enter content"
+      ></textarea>
+    </div>
+
+    <div id="create-error"></div>
+
+    <div class="mb-3 text-center">
+      <button type="submit" class="btn btn-primary">Create Blog</button>
+    </div>
+
+  </form>
+</section>
